@@ -1,0 +1,158 @@
+/* 让标题容器始终显示 */
+.item-title {
+  opacity: 1 !important; /* 强制显示 */
+}
+
+/* 移除标题文字的边框 */
+.item-link-text {
+  border: none;
+  margin: 0;
+}
+
+/* 自定义 Bootstrap 栅格宽度：每行五个 */
+@media (min-width: 1200px) {
+  .col-lg-2-4 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}
+
+/* 相关文章样式 */
+.related-posts {
+  margin: 40px 0;
+  padding: 20px 0;
+  border-top: 1px solid #eee;
+}
+
+.related-posts h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* 容器使用 Flex 布局 */
+.related-posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* 每个文章项使用五列布局 */
+.related-post-item {
+  transition: transform 0.3s ease;
+  flex: 0 0 calc(20% - 20px);
+  max-width: calc(20% - 20px);
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.related-post-item:hover {
+  transform: translateY(-5px);
+}
+
+@media (hover: none) {
+  .related-post-item:hover {
+    transform: none;
+  }
+}
+
+.related-post-item a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 10px;
+}
+
+/* 图片容器保持比例 */
+.thumb-container {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  position: relative;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.related-post-thumb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+}
+
+/* 标题在图片下方居中显示 */
+.related-post-title {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  color: #333;
+  text-align: center;
+}
+
+/* 无相关文章提示 */
+.no-related {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+/* 响应式优化：中屏显示3列，小屏显示2列 */
+@media (max-width: 992px) {
+  .related-post-item {
+    flex: 0 0 calc(33.3333% - 20px);
+    max-width: calc(33.3333% - 20px);
+    padding: 8px;
+    margin-bottom: 15px;
+  }
+
+  .related-post-title {
+    font-size: 1.3rem;
+    -webkit-line-clamp: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .related-post-item {
+    flex: 0 0 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+
+  .related-post-title {
+    font-size: 1.2rem;
+    -webkit-line-clamp: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .related-post-item {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 6px;
+    margin-bottom: 8px;
+  }
+
+  .related-post-title {
+    font-size: 1rem;
+    line-height: 1.3;
+    -webkit-line-clamp: 2;
+  }
+}
