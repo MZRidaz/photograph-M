@@ -1,0 +1,1 @@
+Typecho 主题 photograph 修改版
