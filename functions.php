@@ -36,52 +36,62 @@ function showThumb($obj, $link = false) {
 
 //获取附件图片
 function getAttachImg($cid) {
-	$db = Typecho_Db::get();
-	$rs = $db->fetchAll($db->select('table.contents.text')
-			->from('table.contents')
-			->where('table.contents.parent=?', $cid)
-			->order('table.contents.cid', Typecho_Db::SORT_ASC));
-	$attachPath = array();
-	foreach($rs as $attach) {
-		$attach = unserialize($attach['text']);
-		if($attach['mime'] == 'image/jpeg') {
-			$attachPath[] = array($attach['name'], '//m.mcoo.cc'.$attach['path']);
-		}
+    $db = Typecho_Db::get();
+    $rs = $db->fetchAll($db->select('table.contents.text')
+            ->from('table.contents')
+            ->where('table.contents.parent=?', $cid)
+            ->order('table.contents.cid', Typecho_Db::SORT_ASC));
+    $attachPath = array();
+    $options = Typecho_Widget::widget('Widget_Options');
+    foreach($rs as $attach) {
+        $attach = unserialize($attach['text']);
+        if($attach['mime'] == 'image/jpeg') {
+            $attachPath[] = array(
+                $attach['name'], 
+                Typecho_Common::url($attach['path'], $options->siteUrl)
+            );
+        }
     }
-	return $attachPath;
+    return $attachPath;
+}
+
+
+//后期软件
+function afterSoftware() {
+	return array(
+		_t('未知'),
+		_t('Photoshop'),
+		_t('Google Picasa'),
+		_t('Snapseed'),
+		_t('泼辣修图'),
+		_t('美图秀秀'),
+		_t('Camera 360'),
+		_t('天天P图'),
+		_t('黄油相机'),
+		_t('Enlight'),
+		_t('Facetune'),
+		_t('Prisma'),
+		_t('PicsArt'),
+		_t('Pixlr'),
+		_t('VSCO'),
+		_t('Instagram'),
+    );
 }
 
 //自定义字段
 function themeFields($layout) {
-    // 可插入多地址的模特主页字段，分多个社交平台
-    $src_twitter = new Typecho_Widget_Helper_Form_Element_Text('src_twitter', NULL, NULL, _t('推特'), _t(''));
-    $layout->addItem($src_twitter);
-    
-    $src_instagram = new Typecho_Widget_Helper_Form_Element_Text('src_instagram', NULL, NULL, _t('Instagram'), _t(''));
-    $layout->addItem($src_instagram);
-    
-    $src_douyin = new Typecho_Widget_Helper_Form_Element_Text('src_douyin', NULL, NULL, _t('抖音'), _t(''));
-    $layout->addItem($src_douyin);
-    
-    $src_weibo = new Typecho_Widget_Helper_Form_Element_Text('src_weibo', NULL, NULL, _t('微博'), _t(''));
-    $layout->addItem($src_weibo);
-    
-    $src_other = new Typecho_Widget_Helper_Form_Element_Text('src_other', NULL, NULL, _t('其他'), _t(''));
-    $layout->addItem($src_other);
-    
-    // 下载地址字段
-    $terabox_url = new Typecho_Widget_Helper_Form_Element_Text('terabox_url', NULL, NULL, _t('TeraBox'), _t(''));
-    $layout->addItem($terabox_url);
-
-    $quark_url = new Typecho_Widget_Helper_Form_Element_Text('quark_url', NULL, NULL, _t('夸克'), _t(''));
-    $layout->addItem($quark_url);
-
-    $baidu_url = new Typecho_Widget_Helper_Form_Element_Text('baidu_url', NULL, NULL, _t('百度'), _t(''));
-    $layout->addItem($baidu_url);
-    
-    // 封面图片字段
-    $thumb = new Typecho_Widget_Helper_Form_Element_Text('thumb', NULL, NULL, _t('封面图片'), _t(''));
-    $layout->addItem($thumb);
+	$photog = new Typecho_Widget_Helper_Form_Element_Text('photog', NULL, NULL, _t('作者/来源'), _t('在这里填写拍摄照片者的姓名'));
+	$srcurl = new Typecho_Widget_Helper_Form_Element_Text('srcurl', NULL, NULL, _t('来源地址'), _t('在这里填写图片出处的网络地址（留空则不链接地址）'));
+	$appear = new Typecho_Widget_Helper_Form_Element_Text('appear', NULL, NULL, _t('出镜人物'), _t('在这里填写照片出镜者的姓名'));
+	$software = new Typecho_Widget_Helper_Form_Element_Select('software', afterSoftware(), NULL, _t('处理软件'), _t('在这里选择照片后期处理软件'));
+	$description = new Typecho_Widget_Helper_Form_Element_Textarea('description', NULL, NULL, _t('图集描述'), _t('在这里填写照片描述等其他文本信息'));
+	$thumb = new Typecho_Widget_Helper_Form_Element_Text('thumb', NULL, NULL, _t('封面图片'), _t('在这里填写封面图片的地址（留空将自动获取第一个附件图片）'));
+	$layout->addItem($photog);
+	$layout->addItem($srcurl);
+	$layout->addItem($appear);
+	$layout->addItem($software);
+	$layout->addItem($description);
+	$layout->addItem($thumb);
 }
 
 
