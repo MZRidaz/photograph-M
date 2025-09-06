@@ -313,15 +313,12 @@ input[type="text"],input[type="email"],input[type="url"],input[type="password"],
     float: left;
   }
 }
-/* ... 原有样式保持不变 ... */
 
-/* 手机端图片布局优化 - 增强版 */
 @media screen and (max-width: 767px) {
     .item {
         height: 45vw;
     }
     
-    /* 确保每行显示两张图片 */
     #masonry.post.row {
         display: flex;
         flex-wrap: wrap;
@@ -336,7 +333,7 @@ input[type="text"],input[type="email"],input[type="url"],input[type="password"],
         padding: 5px;
         margin: 0;
         box-sizing: border-box;
-        float: left; /* 兼容旧浏览器 */
+        float: left;
     }
     
     .post-item-img {
