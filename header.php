@@ -28,7 +28,7 @@
     <![endif]-->
     <!-- 通过自有函数输出HTML头部信息 -->
     <?php $this->header(); ?>
-    <meta name="baidu-site-verification" content="codeva-blot40FJsz" />
+    
 </head>
 <body>
 <!--[if lt IE 8]>
