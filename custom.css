@@ -1,15 +1,12 @@
-/* 让标题容器始终显示 */
 .item-title {
-  opacity: 1 !important; /* 强制显示 */
+  opacity: 1 !important;
 }
 
-/* 移除标题文字的边框 */
 .item-link-text {
   border: none;
   margin: 0;
 }
 
-/* 自定义 Bootstrap 栅格宽度：每行五个 */
 @media (min-width: 1200px) {
   .col-lg-2-4 {
     flex: 0 0 20%;
@@ -17,7 +14,6 @@
   }
 }
 
-/* 相关文章样式 */
 .related-posts {
   margin: 40px 0;
   padding: 20px 0;
@@ -32,7 +28,6 @@
   border-bottom: 1px solid #eee;
 }
 
-/* 容器使用 Flex 布局 */
 .related-posts-container {
   display: flex;
   flex-wrap: wrap;
@@ -40,7 +35,6 @@
   gap: 20px;
 }
 
-/* 每个文章项使用五列布局 */
 .related-post-item {
   transition: transform 0.3s ease;
   flex: 0 0 calc(20% - 20px);
@@ -72,7 +66,6 @@
   padding: 10px;
 }
 
-/* 图片容器保持比例 */
 .thumb-container {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -92,7 +85,6 @@
   transform: translate(-50%, -50%);
 }
 
-/* 标题在图片下方居中显示 */
 .related-post-title {
   margin-top: 10px;
   font-size: 1.5rem;
@@ -106,14 +98,12 @@
   text-align: center;
 }
 
-/* 无相关文章提示 */
 .no-related {
   text-align: center;
   color: #888;
   font-style: italic;
 }
 
-/* 响应式优化：中屏显示3列，小屏显示2列 */
 @media (max-width: 992px) {
   .related-post-item {
     flex: 0 0 calc(33.3333% - 20px);
