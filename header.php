@@ -31,6 +31,99 @@
     
 </head>
 <body>
+<!-- 弹窗 HTML 结构 -->
+<div id="customModal" class="custom-modal">
+  <div class="custom-modal-content">
+    <span class="custom-close">&times;</span>
+    <h2>🎉 欢迎访问本站！</h2>
+    <p>预览图片数量有限，完整图集请下载⏬。</p>
+  </div>
+</div>
+
+<!-- 弹窗样式 -->
+<style>
+.custom-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.custom-modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 400px;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideIn 0.5s ease forwards;
+}
+
+.custom-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+.custom-close:hover {
+  color: #000;
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+
+<!-- 弹窗脚本 -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var modal = document.getElementById("customModal");
+  var closeBtn = document.querySelector(".custom-close");
+
+  // 检查 sessionStorage 是否已设置
+  if (!sessionStorage.getItem("popupShown")) {
+    // 显示弹窗
+    setTimeout(function() {
+      modal.style.display = "block";
+      sessionStorage.setItem("popupShown", "true");
+    }, 1000); // 延迟 1 秒弹出
+  }
+
+  // 点击关闭按钮
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // 点击背景关闭
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  }
+});
+</script>
 <!--[if lt IE 8]>
     <div class="browsehappy" role="dialog"><?php _e('当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>'); ?>.</div>
 <![endif]-->
